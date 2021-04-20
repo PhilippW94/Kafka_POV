@@ -3,7 +3,7 @@
 # 1. Setup Systeme
 
 Oracle
--- AWS RDS setup
+-- AWS RDS setup -- 
 
 
 Kafka (Docker) 
@@ -17,8 +17,13 @@ MongoDB <br/>
 
 # 2. Setup Source
 
+-- JDBC Connector
+-- -- 
+
+
 -- Files CDC Config
 -- -- Concept Bootstrap Server
+-- -- Concept logs (redo log...)
 -- -- 
 
 # 3. Setup Sink

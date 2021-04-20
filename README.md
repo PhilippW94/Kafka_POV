@@ -1,6 +1,7 @@
 # Kafka_POV Step 1
 
 # 1. Setup Systeme
+
 Oracle
 -- AWS RDS setup
 -- 

@@ -1,6 +1,6 @@
 # Kafka_POV Step 1
 
-# 1. Setup Systeme
+## 1. Setup Systeme
 
 Oracle
 -- AWS RDS setup -- 
@@ -14,8 +14,17 @@ MongoDB <br/>
 -- Atlas <br/> 
 -- Local 
 
+```json
+    {
+      "snapshotId" : "$SNAPSHOTID",
+      "deliveryType" : "automated",
+      "targetClusterName" : "${TARGET}",
+      "targetGroupId" : "${GROUPID}"
+    }
+```
 
-# 2. Setup Source
+
+## 2. Setup Source
 
 -- JDBC Connector
 -- -- 
@@ -26,5 +35,5 @@ MongoDB <br/>
 -- -- Concept logs (redo log...)
 -- -- 
 
-# 3. Setup Sink
+## 3. Setup Sink
 

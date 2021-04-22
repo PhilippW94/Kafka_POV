@@ -66,8 +66,8 @@ In order to manage the contents of your Oracle database, install the [Oracle SQL
 Now it is time to load some sample data into our Oracle RDS instance:
 * __Download__ the [official Oracle sample data](https://www.oracletutorial.com/getting-started/oracle-sample-database/)
 * __Connect to your database__ in SQL Developer:
-  * In SQL Developer, click on the top left on the green cross: <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.49.png?raw=true" width="20">
-    <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.44.43.png?raw=true" width="500">
+  * In SQL Developer, click on the top left on the green cross: <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.49.png?raw=true" width="20"><br/>
+    <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2010.07.59.png?raw=true" width="500">
   * The following screen should show. Fill in the fields as follows:
     <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.44.50.png?raw=true" width="700">
   * __Name__: _Choose and arbitrary name__

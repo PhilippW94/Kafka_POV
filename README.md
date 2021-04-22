@@ -9,7 +9,7 @@ __Time to execute__: 15 mins <br/>
 ---
 ## Description
 
-This proof shows how MongoDB data from an Oracle instance can be loaded/synced to a MongoDB instance via a Kafka Cluster. This setup of this proof includes the following parts:
+This proof shows how MongoDB data from an Oracle instance can be loaded/synced to a MongoDB instance via a Kafka Cluster. The setup of this proof includes the following parts:
 
 * Oracle RDS instance on AWS
 * Setup of SQLDeveloper and loading sample data into your Oracle instance
@@ -18,13 +18,17 @@ This proof shows how MongoDB data from an Oracle instance can be loaded/synced t
 * JDBC Source Connector
 * MongoDB Sink Connector
 
-The execution of this proof demonstrates how inserting data via SQL leads to data being loaded and stored MongoDB. 
+The execution of this proof demonstrates how inserting data via SQL leads to data being loaded and stored into MongoDB. 
 
 ---
 ## Setup
 
 
 __1. Configure AWS RDS instance__
+1. a
+2. a
+3. a
+4. 
 
 __2. Install SQLDeveloper and load sample data__
 

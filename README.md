@@ -22,7 +22,7 @@ The execution of this proof demonstrates how inserting data via SQL leads to dat
 
 ---
 ## Setup
-__0. Configure Laptop__
+__0. Configure Laptop__ <br/>
 Ensure MongoDB version 3.6+ is already installed your laptop, mainly to enable the Mongo Shell and other MongoDB command line tools to be used (no MongoDB databases will be run on the laptop for this proof)
 
 __1. Configure your AWS RDS instance__ <br/>

@@ -25,28 +25,27 @@ The execution of this proof demonstrates how inserting data via SQL leads to dat
 __0. Configure Laptop__
 * Ensure MongoDB version 3.6+ is already installed your laptop, mainly to enable the Mongo Shell and other MongoDB command line tools to be used (no MongoDB databases will be run on the laptop for this proof)
 
-__1. Configure AWS RDS instance__
-* Using your MongoDB 'Solution Architects' [AWS pre-existing account](https://wiki.corp.mongodb.com/display/DEVOPSP/How-To%3A+Access+AWS+Accounts), log on to the [AWS console](http://sa.aws.mongodb.com/)
-* Launch (create) a new RDS instance with the following settings (use defaults settings for the rest of the fields):
-  * __Engine options__: Oracle
-   * __Edition__: Oracle Standard Edition Two
-   * __License__: license-included
+__1. Configure your AWS RDS instance__ <br/>
+Using your MongoDB 'Solution Architects' [AWS pre-existing account](https://wiki.corp.mongodb.com/display/DEVOPSP/How-To%3A+Access+AWS+Accounts), log on to the [AWS console](http://sa.aws.mongodb.com/). Launch (create) a new RDS instance with the following settings (use defaults settings for the rest of the fields):
+   * __Engine options__: Oracle
+     * __Edition__: Oracle Standard Edition Two
+     * __License__: license-included
   * __Templates__: Dev/Test
   * __Settings__: 
-   * __DB instance identifier__: _Your db identifier, e.g. testdb_ 
-   * __Master username__: _E.g. admin. __Note__ this value for later on._ 
-   * __Master password__: _Choose a password. __Note__ this value for later on._ 
-   * __Confirm password__: _Confirm your password._
+    * __DB instance identifier__: _Your db identifier, e.g. testdb_ 
+    * __Master username__: _E.g. admin. __Note__ this value for later on._ 
+    * __Master password__: _Choose a password. __Note__ this value for later on._ 
+    * __Confirm password__: _Confirm your password._
   * __DB instance class__: Burstable classes, _choose smallest available type_
   * __Connectivity__:
-   * __Public access__: Yes
-   * __Availability Zone__: _Choose an availability zone_ 
-   * __Additional configuration__: _Ensure database port 1521 (default)_
+    * __Public access__: Yes
+    * __Availability Zone__: _Choose an availability zone_ 
+    * __Additional configuration__: _Ensure database port 1521 (default)_
   * __Additional configuration__: _The name of your first database, e.g. testdb_ 
 
   * __Add Tags__: In the standard creation process, AWS will not prompt you to define tags. Hence, once your instance is being created, click on the DB identifier (e.g. database-1) and navigate to the _Tags_ tab. _Be sure to set the 3 specific tags ('Name', 'owner', 'expire-on') on your instance as per the [MongoDB AWS Usage Guidelines](https://wiki.corp.mongodb.com/display/DEVOPSP/AWS+Reaping+Policies)_ to avoid your instance from being prematurely reaped
 
-
+Once your database was created, __note__ the Endpoint in the "Connectivity & security" tab for later on.
 
 __2. Install SQLDeveloper and load sample data__
 

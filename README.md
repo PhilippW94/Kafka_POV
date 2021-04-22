@@ -52,7 +52,7 @@ In order to manage the contents of your Oracle database, install the [Oracle SQL
 * Chose your operating system 
 * __Create an Oracle Account__ _(you might not want to use your @mongodb.com address here)_
 * Try launch SQL Developer. In the current version of __MacOS this can be problematic__. The following workarounds exist:
-  * A) In the Security & Privacy Settings of MacOS _(Access via Spotlight Search)_ you should see the following:
+  * A) In the Security & Privacy Settings of MacOS _(Access via Spotlight Search)_ you should see the following: ![alt text](https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.44.31.png?raw=true)
 
 ### __3. Install Kafka Cluster__
 

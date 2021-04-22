@@ -86,6 +86,25 @@ Now it is time to load some sample data into our Oracle RDS instance:
 
 ### __3. Install Kafka Cluster__
 
+* The Kafka Cluster is installed **via Docker**. Make sure that you have a running version of Docker on your laptop. If not, install it via:
+  ```bash
+  brew install --cask docker
+  ```
+* **Download** [docker-compose.yaml](https://github.com/PhilippW94/Kafka_POV/blob/main/Kafka/docker-compose.yml)
+* In the directory where you downloaded _docker-compose.yaml_, open a terminal window and run the Docker container:
+  ```bash
+  docker-compose up -d
+  ```
+* _Optional: You might receive an error message, that this container already exists. In this case, remove all pre-existing and conflicting containers._
+* Downloading and spinning up the Containers can take **10-15min** depending on your internet
+* **Once the setup has finished**, check your environment:
+  ```bash
+  docker-compose ps
+  ```
+  The output should look as follows: 
+  <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.22.png?raw=true" width="700">
+* You can **view your Kafka cluster's** control pane by going to [localhost:9021](http://localhost:9021) in your browser.
+
 ### __4. Configure Atlas Environment__
 * Log-on to your [Atlas account](http://cloud.mongodb.com) (using the MongoDB SA preallocated Atlas credits system) and navigate to your SA project.
 * In the project's Security tab, choose to add a new user, e.g. __main_user__, and for __User Privileges__ specify __Read and write to any database__ (make a note of the password you specify)
@@ -95,5 +114,32 @@ Now it is time to load some sample data into our Oracle RDS instance:
 
 
 ### __5. Setup JDBC Source Connector__
+
+First, the MongoDB and JDBC connector have to be installed in your environment:
+* Retrieve the _CONTAINER ID_ from your **Kafka Connect** container by executing the following command in your terminal:
+  ```bash
+  docker ps -a
+  ```
+* **Note** the _CONTAINER ID_ from **Kafka Connect**:
+  <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.14.png?raw=true" width="700">
+  ```bash
+  containerid=<CONTAINER ID>
+  ```
+* **Install the connectors** by executing the following commands in your shell: _(Confirm all prompts by typing 1,y,y,y)_
+  ```bash
+  docker exec -it $containerid confluent-hub install confluentinc/kafka-connect-jdbc:latest
+  docker exec -it $containerid confluent-hub install mongodb/kafka-connect-mongodb:1.5.0
+  docker restart $containerid
+  ```
+
+* It **might take 2-3min** to have these change visible in your control pane
+* **Check** if connectors are installed via the control pane on [localhost:9021](http://localhost:9021):
+  * Click on your cluster
+  * On the left, click on **connect**
+  * Click on **connect-default**, your connect cluster
+  * Click **Add Connector**
+  * You should see the following overview of selectable connectors:
+    <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.31.png?raw=true" width="700">
+
 
 ### __6. Setup MongoDB Sink__

@@ -23,7 +23,7 @@ The execution of this proof demonstrates how inserting data via SQL leads to dat
 ---
 ## Setup
 __0. Configure Laptop__
-* Ensure MongoDB version 3.6+ is already installed your laptop, mainly to enable the Mongo Shell and other MongoDB command line tools to be used (no MongoDB databases will be run on the laptop for this proof)
+Ensure MongoDB version 3.6+ is already installed your laptop, mainly to enable the Mongo Shell and other MongoDB command line tools to be used (no MongoDB databases will be run on the laptop for this proof)
 
 __1. Configure your AWS RDS instance__ <br/>
 Using your MongoDB 'Solution Architects' [AWS pre-existing account](https://wiki.corp.mongodb.com/display/DEVOPSP/How-To%3A+Access+AWS+Accounts), log on to the [AWS console](http://sa.aws.mongodb.com/). Launch (create) a new RDS instance with the following settings (use defaults settings for the rest of the fields):

@@ -76,10 +76,13 @@ Now it is time to load some sample data into our Oracle RDS instance:
   * __Hostname__: _The endpoint of your AWS RDS instance you noted before_
   * __Port__: _By default 1521_
   * __SID__: _The database name defined before, e.g. __testdb__ _
-  * 
-  
-
-
+* __Load the sample data__:
+  * __Create tables__ by copying out of the downloaded Oracle sample data the contents __ot_schema.sq__ into the worksheet tab in SQL Developer:<br/>
+    <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.00.png?raw=true" width="700">
+  * Press the following button in order to execute the script: <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.39.png?raw=true" width="20">
+  * In the __ot_data.sql__ file, delete all "OT." prefixes, _e.g. by replacing "OT." --> ""_. 
+  * __Load the actual data__ by copying the adjusted contents of the __ot_data.sql__ file to the worksheet tab and executing the script again.
+  * This step should take 1-2 min. Once the insert process commenced, you should be able to browse your freshly generated SQL database with the loaded sample data.
 
 ### __3. Install Kafka Cluster__
 

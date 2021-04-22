@@ -22,10 +22,10 @@ The execution of this proof demonstrates how inserting data via SQL leads to dat
 
 ---
 ## Setup
-__0. Configure Laptop__ <br/>
+### __0. Configure Laptop__ <br/>
 Ensure MongoDB version 3.6+ is already installed your laptop, mainly to enable the Mongo Shell and other MongoDB command line tools to be used (no MongoDB databases will be run on the laptop for this proof)
 
-__1. Configure your AWS RDS instance__ <br/>
+### __1. Configure your AWS RDS instance__ <br/>
 Using your MongoDB 'Solution Architects' [AWS pre-existing account](https://wiki.corp.mongodb.com/display/DEVOPSP/How-To%3A+Access+AWS+Accounts), log on to the [AWS console](http://sa.aws.mongodb.com/). Launch (create) a new RDS instance with the following settings (use defaults settings for the rest of the fields):
    * __Engine options__: Oracle
      * __Edition__: Oracle Standard Edition Two
@@ -47,11 +47,16 @@ Using your MongoDB 'Solution Architects' [AWS pre-existing account](https://wiki
 
 Once your database was created, __note__ the Endpoint in the "Connectivity & security" tab for later on. Creation may take up to 10-15min. 
 
-__2. Install SQLDeveloper and load sample data into your database__
+### __2. Install SQL Developer & Load Sample Data__
+In order to manage the contents of your Oracle database, install the [Oracle SQL Developer](https://www.oracle.com/tools/downloads/sqldev-downloads.html):
+* Chose your operating system 
+* __Create an Oracle Account__ _(you might not want to use your @mongodb.com address here)_
+* Try launch SQL Developer. In the current version of __MacOS this can be problematic__. The following workarounds exist:
+  * A) In the Security & Privacy Settings of MacOS _(Access via Spotlight Search)_ you should see the following:
 
-__3. Install Kafka Cluster__
+### __3. Install Kafka Cluster__
 
-__4. Configure Atlas Environment__
+### __4. Configure Atlas Environment__
 * Log-on to your [Atlas account](http://cloud.mongodb.com) (using the MongoDB SA preallocated Atlas credits system) and navigate to your SA project.
 * In the project's Security tab, choose to add a new user, e.g. __main_user__, and for __User Privileges__ specify __Read and write to any database__ (make a note of the password you specify)
 * In the Security tab, add a new __IP Whitelist__ for your laptop's current IP address
@@ -59,6 +64,6 @@ __4. Configure Atlas Environment__
 * In the Atlas console, for the database cluster you deployed, click the __Connect button__, select __Connect Your Application__, and for the __latest Node.js version__ copy the __Connection String Only__ - make a note of this MongoDB URL address to be used in the next steps
 
 
-__5. Setup Source__
+### __5. Setup JDBC Source Connector__
 
-__6. Setup Sink__
+### __6. Setup MongoDB Sink__

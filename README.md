@@ -101,7 +101,7 @@ Now it is time to load some sample data into our Oracle RDS instance:
   ```bash
   docker-compose ps
   ```
-  The output should look as follows: 
+  The output should look as follows: <br/>
   <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.22.png?raw=true" width="700">
 * You can **view your Kafka cluster's** control pane by going to [localhost:9021](http://localhost:9021) in your browser.
 
@@ -121,7 +121,7 @@ First, the MongoDB and JDBC connector have to be installed in your environment:
   docker ps -a
   ```
 * **Note** the _CONTAINER ID_ from **Kafka Connect**:
-  <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.14.png?raw=true" width="700">
+  <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.14.png?raw=true" width="900">
   ```bash
   containerid=<CONTAINER ID>
   ```
@@ -141,5 +141,22 @@ First, the MongoDB and JDBC connector have to be installed in your environment:
   * You should see the following overview of selectable connectors:
     <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.31.png?raw=true" width="700">
 
+After the installation, configure the JDBC Source Connector:
+* Click **Select** on the **JdbcSourceConnector**'s tile
+* The following fields need to be filled out:
+  * **JDBC URL**: Use the following format, by using the previously noted endpoint of your AWS RDS instance:
+    ```
+    jdbc:oracle:thin:@<endpoint of oracle db>:<port, default 1521>:<inital database name from before>
+    ```
+    Example:
+    ```
+    jdbc:oracle:thin:@database-3.c7qrltnxxxzd.eu-central-1.rds.amazonaws.com:1521:testdb
+    ```
+  * **JDBC User**: _Your chosen username for the AWS RDS instance, e.g. admin_
+  * **JDBC PAssword**: _Your chose password_
+  * **Table loading mode**: incrementing
+  * **Table whitelisting**: CONTACT, CUSTOMER
+  * Click **Continue**
+  * Click **Launch**
 
 ### __6. Setup MongoDB Sink__

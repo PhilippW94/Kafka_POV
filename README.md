@@ -41,7 +41,7 @@ Using your MongoDB 'Solution Architects' [AWS pre-existing account](https://wiki
     * __Public access__: Yes
     * __Availability Zone__: _Choose an availability zone_ 
     * __Additional configuration__: _Ensure database port 1521 (default)_
-  * __Additional configuration__: _The name of your first database, e.g. testdb_ 
+  * __Additional configuration__: _The name of your first database, e.g. testdb. __Note__ this for later on._ 
 
   * __Add Tags__: In the standard creation process, AWS will not prompt you to define tags. Hence, once your instance is being created, click on the DB identifier (e.g. database-1) and navigate to the _Tags_ tab. _Be sure to set the 3 specific tags ('Name', 'owner', 'expire-on') on your instance as per the [MongoDB AWS Usage Guidelines](https://wiki.corp.mongodb.com/display/DEVOPSP/AWS+Reaping+Policies)_ to avoid your instance from being prematurely reaped
 
@@ -52,7 +52,34 @@ In order to manage the contents of your Oracle database, install the [Oracle SQL
 * Chose your operating system 
 * __Create an Oracle Account__ _(you might not want to use your @mongodb.com address here)_
 * Try launch SQL Developer. In the current version of __MacOS this can be problematic__. The following workarounds exist:
-  * A) In the Security & Privacy Settings of MacOS _(Access via Spotlight Search)_ you should see the following: <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.44.31.png?raw=true " width="500">
+  * In the Security & Privacy Settings of MacOS _(Access via Spotlight Search)_ you should see the following: <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.44.31.png?raw=true " width="500">
+  * Click on __Open Anyway__. Check if SQL Developer opens anyway.
+* If this workaround did not work, the following one should:
+  *  Open the terminal in folder where SQL Developer.app is placed _(The file you downloaded from Oracle)_ 
+      ```bash
+      cd SQLDeveloper.app/Contents/Resources/sqldeveloper/
+      zsh sqldeveloper.sh
+      ```
+  * Ignore error messages in the shell, as long as SQLDeveloper starts
+* Once Oracle opens, __do not allow Oracle usage tracking__.<br/><br/>
+
+Now it is time to load some sample data into our Oracle RDS instance:
+* __Download__ the [official Oracle sample data](https://www.oracletutorial.com/getting-started/oracle-sample-database/)
+* __Connect to your database__ in SQL Developer:
+  * In SQL Developer, click on the top left on the green cross: <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.49.png?raw=true" width="20">
+    <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.44.43.png?raw=true" width="500">
+  * The following screen should show. Fill in the fields as follows:
+    <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.44.50.png?raw=true" width="700">
+  * __Name__: _Choose and arbitrary name__
+  * __Username__: _The username you chose when configuring your RDS instance, e.g. by default admin_
+  * __Password__: _The password you chose_
+  * __Hostname__: _The endpoint of your AWS RDS instance you noted before_
+  * __Port__: _By default 1521_
+  * __SID__: _The database name defined before, e.g. __testdb__ _
+  * 
+  
+
+
 
 ### __3. Install Kafka Cluster__
 

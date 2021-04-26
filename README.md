@@ -153,8 +153,8 @@ After the installation, configure the JDBC Source Connector:
     ```
   * **JDBC User**: _Your chosen username for the AWS RDS instance, e.g. admin_
   * **JDBC PAssword**: _Your chose password_
-  * **Table loading mode**: incrementing
   * **Table whitelisting**: CONTACT, CUSTOMER
+  * **Table loading mode**: incrementing
   * Click **Continue**
   * Click **Launch**
 

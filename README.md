@@ -163,3 +163,38 @@ After the installation, configure the JDBC Source Connector:
   * Click **Launch**
 
 ### __6. Setup MongoDB Sink__
+
+```bash
+curl -X PUT http://localhost:8083/connectors/oracle-mongo-sink/config -H "Content-Type: application/json" -d ' {
+           "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
+           "tasks.max":"1",
+           "topics":"CONTACTS",
+           "connection.uri":"mongodb+srv://cluster1.l3iko.mongodb.net",
+           "database":"FromOracle",
+           "collection":"userData",
+           "document.id.strategy":"com.mongodb.kafka.connect.sink.processor.id.strategy.PartialValueStrategy",
+           "document.id.strategy.partial.value.projection.list":"CONTACT_ID",
+           "document.id.strategy.partial.value.projection.type":"AllowList",
+           "writemodel.strategy":"com.mongodb.kafka.connect.sink.writemodel.strategy.UpdateOneBusinessKeyTimestampStrategy",
+           "transforms": "RenameField",
+           "transforms.RenameField.type": "org.apache.kafka.connect.transforms.ReplaceField$Value",
+           "transforms.RenameField.renames": "FIRST_NAME:name.firstname,LAST_NAME:name.lastname"
+}'
+```
+
+```bash
+curl -X POST -H "Content-Type: application/json" --data '
+  {"name": "mongo-sink-custom-replication",
+   "config": {
+     "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
+     "tasks.max":"1",
+     "topics":"mongo-source-custom.kafka.pageviews",
+     "connection.uri":"mongodb://admin:admin@kafka-sink-shard-00-00.l3iko.mongodb.net:27017,kafka-sink-shard-00-01.l3iko.mongodb.net:27017,kafka-sink-shard-00-02.l3iko.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-t4kygm-shard-0&authSource=admin&retryWrites=true&w=majority",
+     "database":"kafka",
+     "collection":"pageviews_replication",
+     "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+     "value.converter": "org.apache.kafka.connect.storage.StringConverter",
+     "value.converter.schemas.enable": "false"
+}}' http://localhost:8083/connectors -w "\n"
+```
+```

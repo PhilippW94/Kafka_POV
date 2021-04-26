@@ -159,6 +159,10 @@ After the installation, configure the JDBC Source Connector:
     ```SQL
      SELECT p.PRODUCT_ID, p.PRODUCT_ID, p.PRODUCT_NAME, p.DESCRIPTION, p.STANDARD_COST, p.LIST_PRICE, c.CATEGORY_NAME FROM PRODUCTS p LEFT OUTER JOIN PRODUCT_CATEGORIES c on p.CATEGORY_ID = c.CATEGORY_ID;
     ```
+    
+    ```SQL
+     SELECT * FROM CONTACTS co INNER JOIN CUSTOMERS cu ON co.CUSTOMER_ID = cu.CUSTOMER_ID;
+    ```
   * Click **Continue**
   * Click **Launch**
 

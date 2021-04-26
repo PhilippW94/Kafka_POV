@@ -152,7 +152,7 @@ After the installation, configure the JDBC Source Connector:
     jdbc:oracle:thin:@database-3.c7qrltnxxxzd.eu-central-1.rds.amazonaws.com:1521:testdb
     ```
   * **JDBC User**: _Your chosen username for the AWS RDS instance, e.g. admin_
-  * **JDBC PAssword**: _Your chose password_
+  * **JDBC Password**: _Your chose password_
   * **Table whitelisting**: CONTACT, CUSTOMER
   * **Table loading mode**: incrementing
   * Click **Continue**

@@ -32,7 +32,6 @@ Using your MongoDB 'Solution Architects' [AWS pre-existing account](https://wiki
      * __License__: license-included
   * __Templates__: Dev/Test
   * __Settings__: 
-    * __DB instance identifier__: _Your db identifier, e.g. testdb_ 
     * __Master username__: _E.g. admin. __Note__ this value for later on._ 
     * __Master password__: _Choose a password. __Note__ this value for later on._ 
     * __Confirm password__: _Confirm your password._

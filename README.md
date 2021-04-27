@@ -178,13 +178,15 @@ curl -X POST http://localhost:8083/connectors -H "Content-Type: application/json
 
 Launch the connector by executing the configured API call. The **query** will join the sample data's ```PRODUCTS```and ```PRODUCT_CATEGORIES```tables.
 
+Having configured ```"mode": "bulk"```will continously send the data previously loaded into the Oracle instance to our Kafka Cluster. This simulates a constant write load on the Oracle instance.
+
 ### __6. Setup MongoDB Sink__
 The Sink Connector will be launched by the same means as the Source Connector. You will need do **configure the following API call's payload**:
 ```bash
 curl -X PUT http://localhost:8083/connectors/oracle-mongo-sink/config -H "Content-Type: application/json" -d ' {
         "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
         "tasks.max":"1",
-        "topics":"oracle-test2",
+        "topics":"oracle-kafka-mongodb",
         "connection.uri":"mongodb+srv://user:password@cluster1.l3iko.mongodb.net",
         "database":"FromOracle",
         "collection":"userData",
@@ -202,3 +204,5 @@ curl -X PUT http://localhost:8083/connectors/oracle-mongo-sink/config -H "Conten
 * **collection**: The collection name in MongoDB Atlas, you want your Oracle data to be loaded to.
 
 Launch the connector by executing the configured API call. The defined _transforms_ nest the price information into a subdocument.
+
+## Execution

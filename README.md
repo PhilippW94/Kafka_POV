@@ -216,7 +216,7 @@ Here we can see the successfully launched connectors. In order to demonstrate th
     <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-27%20at%2015.06.36.png?raw=true" width="900">
 If you click on the topic itself and select the _messages_ tab you should see the constantly loaded data coming in continously. 
 
-Last but not least, we show that the MongoDB Sink Connector does it's job by showing that the data actually arrives in Atlas:<br/><br/>
+Last but not least, we show that the MongoDB Sink Connector does it's job by showing that the data actually arrives in Atlas. The resulting documents should be of the following form: <br/><br/>
     <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-27%20at%2015.01.22.png?raw=true" width="900">
 
-
+**Conclusion**: You can easily load data from Oracle to MongoDB via Kafka and additionally transform, nest and ```JOIN``` it on the way.

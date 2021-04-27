@@ -205,4 +205,11 @@ curl -X PUT http://localhost:8083/connectors/oracle-mongo-sink/config -H "Conten
 
 Launch the connector by executing the configured API call. The defined _transforms_ nest the price information into a subdocument.
 
+---
 ## Execution
+The execution of this POV is rather straightforward, as at this point there should not be much left to do. You might want to show your prospect the setup of the connectors. 
+
+Once the connectors are configured and launched, navigate to _Connect_ in the [control pane](http://localhost:9021) of your Kafka Cluster and click on your connect cluster. You should be seeing the following connectors:
+    <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-27%20at%2014.58.49.png?raw=true" width="800">
+
+

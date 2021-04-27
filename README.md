@@ -18,7 +18,9 @@ This proof shows how MongoDB data from an Oracle instance can be loaded/synced t
 * JDBC Source Connector
 * MongoDB Sink Connector
 
-The execution of this proof demonstrates how inserting data via SQL leads to data being loaded and stored into MongoDB. 
+The execution of this proof demonstrates how inserting data via SQL leads to data being loaded and stored into MongoDB. With Kafka Connectors, we demonstrate:
+* How to ```JOIN``` **two tables** via the JDBC Source Connector.
+* How to load rich documents into MongoDB by **nesting fields into subdocuments** via the MongoDB Sink Connector.
 
 ---
 ## Setup
@@ -140,7 +142,7 @@ First, the MongoDB and JDBC connector have to be installed in your environment:
   * You should see the following overview of selectable connectors:
     <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.31.png?raw=true" width="700">
 
-After the installation, configure your JDBC Source Connector. The Source Connector will be launched via the terminal by the means of an API call to the Kafka Connect Cluster. You will need do **adjust the following API call's payload**:
+After the installation, configure your JDBC Source Connector. The Source Connector will be launched via the terminal by the means of an API call to the Kafka Connect Cluster. You will need do **configure the following API call's payload**:
   
 ```bash
 curl -X POST http://localhost:8083/connectors -H "Content-Type: application/json" -d '{
@@ -174,15 +176,16 @@ curl -X POST http://localhost:8083/connectors -H "Content-Type: application/json
    SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.DESCRIPTION, p.STANDARD_COST, p.LIST_PRICE, c.CATEGORY_NAME FROM PRODUCTS p INNER JOIN PRODUCT_CATEGORIES c ON p.CATEGORY_ID = c.CATEGORY_ID;
   ```
 
+Launch the connector by executing the configured API call. The **query** will join the sample data's ```PRODUCTS```and ```PRODUCT_CATEGORIES```tables.
 
 ### __6. Setup MongoDB Sink__
-
+The Sink Connector will be launched by the same means as the Source Connector. You will need do **configure the following API call's payload**:
 ```bash
 curl -X PUT http://localhost:8083/connectors/oracle-mongo-sink/config -H "Content-Type: application/json" -d ' {
         "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
         "tasks.max":"1",
         "topics":"oracle-test2",
-        "connection.uri":"mongodb+srv://admin:admin@cluster1.l3iko.mongodb.net",
+        "connection.uri":"mongodb+srv://user:password@cluster1.l3iko.mongodb.net",
         "database":"FromOracle",
         "collection":"userData",
         "document.id.strategy":"com.mongodb.kafka.connect.sink.processor.id.strategy.PartialValueStrategy",
@@ -194,4 +197,8 @@ curl -X PUT http://localhost:8083/connectors/oracle-mongo-sink/config -H "Conten
         "transforms.RenameField.renames": "STANDARD_COST:prices.standard,LIST_PRICE:prices.list"
 }'
 ```
+* **connection.uri**: Use the same format as given above.
+* **database**: The database name in MongoDB Atlas, you want your Oracle data to be loaded to.
+* **collection**: The collection name in MongoDB Atlas, you want your Oracle data to be loaded to.
 
+Launch the connector by executing the configured API call. The defined _transforms_ nest the price information into a subdocument.

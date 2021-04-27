@@ -18,7 +18,7 @@ This proof shows how MongoDB data from an Oracle instance can be loaded/synced t
 * JDBC Source Connector
 * MongoDB Sink Connector
 
-The execution of this proof demonstrates how inserting data via SQL leads to data being loaded and stored into MongoDB. With Kafka Connectors, we demonstrate:
+The execution of **this proof demonstrates how inserting data via SQL leads to data being loaded and stored into MongoDB**. With the used Kafka Connectors, we demonstrate the following **additional capabilities**:
 * How to ```JOIN``` **two tables** via the JDBC Source Connector.
 * How to load rich documents into MongoDB by **nesting fields into subdocuments** via the MongoDB Sink Connector.
 

@@ -140,65 +140,58 @@ First, the MongoDB and JDBC connector have to be installed in your environment:
   * You should see the following overview of selectable connectors:
     <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.31.png?raw=true" width="700">
 
-After the installation, configure the JDBC Source Connector:
-* Click **Select** on the **JdbcSourceConnector**'s tile
-* The following fields need to be filled out:
-  * **JDBC URL**: Use the following format, by using the previously noted endpoint of your AWS RDS instance:
-    ```
-    jdbc:oracle:thin:@<endpoint of oracle db>:<port, default 1521>:<inital database name from before>
-    ```
-    Example:
-    ```
-    jdbc:oracle:thin:@database-1.c7qrltnpbuzd.eu-central-1.rds.amazonaws.com:1521:testdb
-    ```
-  * **JDBC User**: _Your chosen username for the AWS RDS instance, e.g. admin_
-  * **JDBC Password**: _Your chose password_
-  * **Table whitelisting**: CONTACTS, CUSTOMERS
-  * **Table loading mode**: bulk
-  * **Query**: 
-    ```SQL
-     SELECT p.PRODUCT_ID, p.PRODUCT_ID, p.PRODUCT_NAME, p.DESCRIPTION, p.STANDARD_COST, p.LIST_PRICE, c.CATEGORY_NAME FROM PRODUCTS p LEFT OUTER JOIN PRODUCT_CATEGORIES c on p.CATEGORY_ID = c.CATEGORY_ID;
-    ```
-    
-    ```SQL
-     SELECT * FROM CONTACTS co INNER JOIN CUSTOMERS cu ON co.CUSTOMER_ID = cu.CUSTOMER_ID;
-    ```
-  * Click **Continue**
-  * Click **Launch**
+After the installation, configure your JDBC Source Connector. The Source Connector will be launched via the terminal by the means of an API call to the Kafka Connect Cluster. You will need do **adjust the following API call's payload**:
+  
+```bash
+curl -X POST http://localhost:8083/connectors -H "Content-Type: application/json" -d '{
+"name": "oracle-source-products",
+"config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+        "topic.prefix": "oracle-kafka-mongodb",
+        "connection.url": "jdbc:oracle:thin:@database-1.c7qrltnpbuzd.eu-central-1.rds.amazonaws.com:1521:testdb",
+        "connection.user": "admin",
+        "connection.password": "password",
+        "query":"SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.DESCRIPTION, p.STANDARD_COST, p.LIST_PRICE, c.CATEGORY_NAME FROM PRODUCTS p INNER JOIN PRODUCT_CATEGORIES c ON p.CATEGORY_ID = c.CATEGORY_ID",
+        "mode": "bulk",
+        "batch.max.rows": "1",
+        "poll.interval.ms": "5000"
+    }
+}'
+```
+
+* **connection.uri**: Use the following format, by using the previously noted endpoint of your AWS RDS instance:
+  ```
+  jdbc:oracle:thin:@<endpoint of oracle db>:<port, default 1521>:<inital database name from before>
+  ```
+  Example:
+  ```
+  jdbc:oracle:thin:@database-1.c7qrltnpbuzd.eu-central-1.rds.amazonaws.com:1521:testdb
+  ```
+* **connection.user**: _Your chosen username for the AWS RDS instance, e.g. admin_
+* **connection.password**: _Your chose password_
+* **query**: 
+  ```SQL
+   SELECT p.PRODUCT_ID, p.PRODUCT_NAME, p.DESCRIPTION, p.STANDARD_COST, p.LIST_PRICE, c.CATEGORY_NAME FROM PRODUCTS p INNER JOIN PRODUCT_CATEGORIES c ON p.CATEGORY_ID = c.CATEGORY_ID;
+  ```
+
 
 ### __6. Setup MongoDB Sink__
 
 ```bash
 curl -X PUT http://localhost:8083/connectors/oracle-mongo-sink/config -H "Content-Type: application/json" -d ' {
-           "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
-           "tasks.max":"1",
-           "topics":"CONTACTS",
-           "connection.uri":"mongodb+srv://cluster1.l3iko.mongodb.net",
-           "database":"FromOracle",
-           "collection":"userData",
-           "document.id.strategy":"com.mongodb.kafka.connect.sink.processor.id.strategy.PartialValueStrategy",
-           "document.id.strategy.partial.value.projection.list":"CONTACT_ID",
-           "document.id.strategy.partial.value.projection.type":"AllowList",
-           "writemodel.strategy":"com.mongodb.kafka.connect.sink.writemodel.strategy.UpdateOneBusinessKeyTimestampStrategy",
-           "transforms": "RenameField",
-           "transforms.RenameField.type": "org.apache.kafka.connect.transforms.ReplaceField$Value",
-           "transforms.RenameField.renames": "FIRST_NAME:name.firstname,LAST_NAME:name.lastname"
+        "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
+        "tasks.max":"1",
+        "topics":"oracle-test2",
+        "connection.uri":"mongodb+srv://admin:admin@cluster1.l3iko.mongodb.net",
+        "database":"FromOracle",
+        "collection":"userData",
+        "document.id.strategy":"com.mongodb.kafka.connect.sink.processor.id.strategy.PartialValueStrategy",
+        "document.id.strategy.partial.value.projection.list":"PRODUCT_ID",
+        "document.id.strategy.partial.value.projection.type":"AllowList",
+        "writemodel.strategy":"com.mongodb.kafka.connect.sink.writemodel.strategy.UpdateOneBusinessKeyTimestampStrategy",
+        "transforms": "RenameField",
+        "transforms.RenameField.type": "org.apache.kafka.connect.transforms.ReplaceField$Value",
+        "transforms.RenameField.renames": "STANDARD_COST:prices.standard,LIST_PRICE:prices.list"
 }'
 ```
 
-```bash
-curl -X POST -H "Content-Type: application/json" --data '
-  {"name": "mongo-sink-custom-replication",
-   "config": {
-     "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
-     "tasks.max":"1",
-     "topics":"mongo-source-custom.kafka.pageviews",
-     "connection.uri":"mongodb://admin:admin@kafka-sink-shard-00-00.l3iko.mongodb.net:27017,kafka-sink-shard-00-01.l3iko.mongodb.net:27017,kafka-sink-shard-00-02.l3iko.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-t4kygm-shard-0&authSource=admin&retryWrites=true&w=majority",
-     "database":"kafka",
-     "collection":"pageviews_replication",
-     "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-     "value.converter": "org.apache.kafka.connect.storage.StringConverter",
-     "value.converter.schemas.enable": "false"
-}}' http://localhost:8083/connectors -w "\n"
-```
-```

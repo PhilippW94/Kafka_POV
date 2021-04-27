@@ -9,7 +9,7 @@ __Time to execute__: 15 min <br/>
 ---
 ## Description
 
-This proof shows how MongoDB data from an Oracle instance can be loaded/synced to a MongoDB instance via a Kafka Cluster. The setup of this proof includes the following parts:
+This proof shows **how MongoDB data from an Oracle instance can be loaded/synced to a MongoDB instance via a Kafka**. The setup of this proof includes the following parts:
 
 * Oracle RDS instance on AWS
 * Setup of SQLDeveloper and loading sample data into your Oracle instance

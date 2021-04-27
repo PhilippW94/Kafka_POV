@@ -133,8 +133,8 @@ First, the MongoDB and JDBC connector have to be installed in your environment:
   docker restart $containerid
   ```
 
-* It **might take 2-3min** to have these change visible in your control pane
-* **Check** if connectors are installed via the control pane on [localhost:9021](http://localhost:9021):
+* It **might take 2-3min** to have these change visible in your control center
+* **Check** if connectors are installed via the control center on [localhost:9021](http://localhost:9021):
   * Click on your cluster
   * On the left, click on **connect**
   * Click on **connect-default**, your connect cluster
@@ -209,7 +209,14 @@ Launch the connector by executing the configured API call. The defined _transfor
 ## Execution
 The execution of this POV is rather straightforward, as at this point there should not be much left to do. You might want to show your prospect the setup of the connectors. 
 
-Once the connectors are configured and launched, navigate to _Connect_ in the [control pane](http://localhost:9021) of your Kafka Cluster and click on your connect cluster. You should be seeing the following connectors: <br/><br/>
+Once the connectors are configured and launched, navigate to _Connect_ in the [control center](http://localhost:9021) of your Kafka Cluster and click on your connect cluster. You should be seeing the following connectors: <br/><br/>
     <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-27%20at%2014.58.49.png?raw=true" width="900">
+
+Here we can see the successfully launched connectors. In order to demonstrate that the JDBC Source Connector is actually doing its job, navigate in the control center of your Kafka Cluster to _Topics_. Here you should see the _oracle-kafka-mongodb_ topic, which includes the data loaded from the Oracle instance to the Kafka Cluster: <br/><br/>
+    <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-27%20at%2015.06.36.png?raw=true" width="900">
+If you click on the topic itself and select the _messages_ tab you should see the constantly loaded data coming in continously. 
+
+Last but not least, we show that the MongoDB Sink Connector does it's job by showing that the data actually arrives in Atlas:<br/><br/>
+    <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-27%20at%2015.01.22.png?raw=true" width="900">
 
 

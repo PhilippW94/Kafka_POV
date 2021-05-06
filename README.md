@@ -226,7 +226,7 @@ Last but not least, we show that the MongoDB Sink Connector does it's job by sho
 ---
 ## Merge two collections with a Realm Function and a Trigger
 
-To be independent from the above use case we install a couple more connectors:
+To be independent from the above use case we install a couple more connectors, additional to the JDBC connector already in place from the previous sections of this POV:
 * connectors/orcale-source-table-whitelisting.sh: this Oracle source connector streams all data from the CUSTOMERS and ORDERS tables into the topics oracle-bulk-<tablename>
 * mongo-sink-customers.sh: this Mongo sink connector reads the oracle-bulk-CUSTOMERS topic and stores it into MongoDB
 * mongo-sink-orders.sh: this Mongo sink connector reads the oracle-bulk-ORDERS topic and stores it into MongoDB

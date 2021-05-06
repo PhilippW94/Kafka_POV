@@ -17,9 +17,10 @@ This proof shows **how MongoDB data from an Oracle instance can be loaded/synced
 * MongoDB instance
 * JDBC Source Connector
 * MongoDB Sink Connector
+* Realm Function and Trigger to merge collections
 
 The execution of **this proof demonstrates how inserting data via SQL leads to data being loaded and stored into MongoDB**. With the used Kafka Connectors, we demonstrate the following **additional capabilities**:
-* How to ```JOIN``` **two tables** via the JDBC Source Connector.
+* How to ```JOIN``` **two tables** via the JDBC Source Connector. Here only **1:1 relationships** are implemented. For **1:N relationships** refer to the section regarding **"Realm Function and Trigger"**
 * How to load rich documents into MongoDB by **nesting fields into subdocuments** via the MongoDB Sink Connector.
 
 ---

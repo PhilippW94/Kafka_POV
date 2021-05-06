@@ -1,7 +1,6 @@
 exports = function(changeEvent) {
 
   const fullDocument = changeEvent.fullDocument;
-
   const collection = context.services.get("Cluster0").db("DHL").collection("customers");
 
   const doc = collection.updateOne(
@@ -18,5 +17,3 @@ exports = function(changeEvent) {
   );
 
 };
-
-//find it with {orders:{$exists:true}}

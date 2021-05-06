@@ -244,6 +244,8 @@ To do so we log into MongoDB Atlas and choose **Triggers** on the left side and 
 * Full Document: ON
 * Event Type: Function
 
-You can find the function inside [realm_functions/addOrderToCustomer.js](https://github.com/PhilippW94/Kafka_POV/blob/main/realm_functions/addOrderToCustomer.js).
+You can find the function inside [realm_functions/addOrderToCustomer.js](https://github.com/PhilippW94/Kafka_POV/blob/main/realm_functions/addOrderToCustomer.js). Not all customers have orders.  
 
-As a result all orders will be merged into the customers collection.
+As a result all orders will be merged into the customers collection. Once the the Realm function is up and running, check result with Compass or the Atlas GUI. No all customers have orders, thus you might want to filter the results by using the following filter parameters: ```{orders:{$exists:true}}```
+
+Thus the 1:N relationship of customer to orders can be implemented "automatically" in MongoDB by nesting the orders in the customer collection. This demonstrates not only the transfer of data from an Oracle Instance to MongoDB, but also the shift in paradigm that data is stored the way it is accessed. 

@@ -1,12 +1,9 @@
 exports = function(changeEvent) {
-  
 
   const fullDocument = changeEvent.fullDocument;
+  const collection = context.services.get("Cluster0").db("DHL").collection("customers");
 
-  const collection_c = context.services.get("Cluster0").db("DHL").collection("customers");
-  const collection_o = context.services.get("Cluster0").db("DHL").collection("orders");
-
-  const doc = collection_c.updateOne(
+  const doc = collection.updateOne(
     {
       "CUSTOMER_ID": fullDocument.CUSTOMER_ID
     },{
@@ -19,14 +16,4 @@ exports = function(changeEvent) {
     }
   );
 
-  const markOrder = collection_o.updateOne({
-    "ORDER_ID": fullDocument.ORDER_ID
-  },{
-    "$set": {
-      "_used": true
-    }
-  });
-
 };
-
-//find it with {orders:{$exists:true}}

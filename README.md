@@ -227,9 +227,9 @@ Last but not least, we show that the MongoDB Sink Connector does it's job by sho
 ## Merge two collections with a Realm Function and a Trigger
 
 To be independent from the above use case we install a couple more connectors, additional to the JDBC connector already in place from the previous sections of this POV:
-* connectors/orcale-source-table-whitelisting.sh: this Oracle source connector streams all data from the CUSTOMERS and ORDERS tables into the topics oracle-bulk-<tablename>
-* mongo-sink-customers.sh: this Mongo sink connector reads the oracle-bulk-CUSTOMERS topic and stores it into MongoDB
-* mongo-sink-orders.sh: this Mongo sink connector reads the oracle-bulk-ORDERS topic and stores it into MongoDB
+* [connectors/orcale-source-table-whitelisting.sh](https://github.com/PhilippW94/Kafka_POV/blob/main/connectors/orcale-source-table-whitelisting.sh): this Oracle source connector streams all data from the CUSTOMERS and ORDERS tables into the topics oracle-bulk-<tablename>
+* [connectors/mongo-sink-customers.sh](https://github.com/PhilippW94/Kafka_POV/blob/main/connectors/mongo-sink-customers.sh) : this Mongo sink connector reads the oracle-bulk-CUSTOMERS topic and stores it into MongoDB
+* [connectors/mongo-sink-orders.sh](https://github.com/PhilippW94/Kafka_POV/blob/main/connectors/mongo-sink-orders.sh): this Mongo sink connector reads the oracle-bulk-ORDERS topic and stores it into MongoDB
 
 We are going to merge the **ORDERS** collection into the **CUSTOMERS** collection. For that we create an Atlas Trigger and a Realm Function.
 
@@ -244,6 +244,6 @@ To do so we log into MongoDB Atlas and choose **Triggers** on the left side and 
 * Full Document: ON
 * Event Type: Function
 
-You can find the function inside realm_functions/addOrderToCustomer.js.
+You can find the function inside [realm_functions/addOrderToCustomer.js](https://github.com/PhilippW94/Kafka_POV/blob/main/realm_functions/addOrderToCustomer.js).
 
 As a result all orders will be merged into the customers collection.

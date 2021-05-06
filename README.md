@@ -221,3 +221,28 @@ Last but not least, we show that the MongoDB Sink Connector does it's job by sho
     <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-27%20at%2015.01.22.png?raw=true" width="700">
 
 **Conclusion**: You can easily load data from Oracle to MongoDB via Kafka and additionally transform, nest and ```JOIN``` it on the way.
+
+---
+## Merge two collections with a Realm Function and a Trigger
+
+To be independent from the above use case we install a couple more connectors:
+* connectors/orcale-source-table-whitelisting.sh: this Oracle source connector streams all data from the CUSTOMERS and ORDERS tables into the topics oracle-bulk-<tablename>
+* mongo-sink-customers.sh: this Mongo sink connector reads the oracle-bulk-CUSTOMERS topic and stores it into MongoDB
+* mongo-sink-orders.sh: this Mongo sink connector reads the oracle-bulk-ORDERS topic and stores it into MongoDB
+
+We are going to merge the **ORDERS** collection into the **CUSTOMERS** collection. For that we create an Atlas Trigger and a Realm Function.
+
+To do so we log into MongoDB Atlas and choose **Triggers** on the left side and click **Add Trigger** on the new loaded page. We choose the following parameters:
+
+* Trigger Type: Database
+* Name: Choose an appropriate name
+* Enabled: ON
+* Choose your Cluster and the database
+* Choose *orders* for the collection, because we want to follow this change stream
+* Operation Type: Insert and Update
+* Full Document: ON
+* Event Type: Function
+
+You can find the function inside realm_functions/addOrderToCustomer.js.
+
+As a result all orders will be merged into the customers collection.

@@ -3,7 +3,7 @@
 __Load data from an Oracle instance via a Kafka Cluster into your MongoDB instance.__
 
 __SA Maintainer__: Michael Gerstenberg, Timo Lackmann, Philipp Waffler<br/>
-__Time to setup__: 90 min <br/>
+__Time to setup__: 120 min <br/>
 __Time to execute__: 15 min <br/>
 
 ---

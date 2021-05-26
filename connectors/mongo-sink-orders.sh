@@ -3,7 +3,7 @@ curl -X PUT http://localhost:8083/connectors/mongo-sink-orders/config -H "Conten
         "tasks.max":"1",
         "topics":"oracle-bulk-ORDERS",
         "connection.uri":"mongodb+srv://<username>:<password>@<endpoint>",
-        "database":"DHL",
+        "database":"FromOracle",
         "collection":"orders",
         "document.id.strategy":"com.mongodb.kafka.connect.sink.processor.id.strategy.PartialValueStrategy",
         "document.id.strategy.partial.value.projection.list":"ORDER_ID",

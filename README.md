@@ -190,7 +190,7 @@ curl -X PUT http://localhost:8083/connectors/oracle-mongo-sink/config -H "Conten
         "topics":"oracle-kafka-mongodb",
         "connection.uri":"mongodb+srv://user:password@cluster1.l3iko.mongodb.net",
         "database":"FromOracle",
-        "collection":"userData",
+        "collection":"productData",
         "document.id.strategy":"com.mongodb.kafka.connect.sink.processor.id.strategy.PartialValueStrategy",
         "document.id.strategy.partial.value.projection.list":"PRODUCT_ID",
         "document.id.strategy.partial.value.projection.type":"AllowList",

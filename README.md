@@ -12,9 +12,9 @@ There is **no prior knowledge of Kafka required** in order to successfully execu
 
 This proof shows **how MongoDB data from an Oracle instance can be loaded/synced to a MongoDB instance via a Kafka**. The setup of this proof includes the following parts:
 
-1. [Setup Oracle RDS instance on AWS](#-configure-your-aws-rds-instance)
-2. 
-* Setup of SQLDeveloper and loading sample data into your Oracle instance
+1. [Configure your Laptop](#-configure-laptop)
+2. [Configure and Setup your AWS RDS instance](#-configure-your-aws-rds-instance)
+3. [Install SQL Developer & Load Sample Data](#-Install-SQL-Developer-&-Load-Sample-Data)
 * Kafka Cluster on your local machine
 * MongoDB instance
 * JDBC Source Connector
@@ -27,7 +27,7 @@ The execution of **this proof demonstrates how inserting data via SQL leads to d
 
 ---
 # Setup
-## ![1](https://github.com/PhilippW94/Kafka_POV/blob/main/images/1b.png) Configure Laptop 
+## ![1](https://github.com/PhilippW94/Kafka_POV/blob/main/images/1b.png) Configure your Laptop 
 Ensure MongoDB version 3.6+ is already installed your laptop, mainly to enable the Mongo Shell and other MongoDB command line tools to be used (no MongoDB databases will be run on the laptop for this proof)
 
 ## ![2](https://github.com/PhilippW94/Kafka_POV/blob/main/images/2b.png) Configure your AWS RDS instance

@@ -12,7 +12,8 @@ There is **no prior knowledge of Kafka required** in order to successfully execu
 
 This proof shows **how MongoDB data from an Oracle instance can be loaded/synced to a MongoDB instance via a Kafka**. The setup of this proof includes the following parts:
 
-* Oracle RDS instance on AWS
+1. [Setup Oracle RDS instance on AWS](#-configure-your-aws-rds-instance)
+2. 
 * Setup of SQLDeveloper and loading sample data into your Oracle instance
 * Kafka Cluster on your local machine
 * MongoDB instance
@@ -25,11 +26,11 @@ The execution of **this proof demonstrates how inserting data via SQL leads to d
 * How to load rich documents into MongoDB by **nesting fields into subdocuments** via the MongoDB Sink Connector.
 
 ---
-## Setup
-### __0. Configure Laptop__ <br/>
+# Setup
+## ![1](https://github.com/PhilippW94/Kafka_POV/blob/main/images/1b.png) Configure Laptop 
 Ensure MongoDB version 3.6+ is already installed your laptop, mainly to enable the Mongo Shell and other MongoDB command line tools to be used (no MongoDB databases will be run on the laptop for this proof)
 
-### __1. Configure your AWS RDS instance__ <br/>
+## ![2](https://github.com/PhilippW94/Kafka_POV/blob/main/images/2b.png) Configure your AWS RDS instance
 Using your MongoDB 'Solution Architects' [AWS pre-existing account](https://wiki.corp.mongodb.com/display/DEVOPSP/How-To%3A+Access+AWS+Accounts), log on to the [AWS console](http://sa.aws.mongodb.com/). Launch (create) a new RDS instance with the following settings (use defaults settings for the rest of the fields):
    * __Engine options__: Oracle
      * __Edition__: Oracle Standard Edition Two
@@ -50,7 +51,10 @@ Using your MongoDB 'Solution Architects' [AWS pre-existing account](https://wiki
 
 Once your database was created, __note__ the Endpoint in the "Connectivity & security" tab for later on. Creation may take up to 10-15min. 
 
-### __2. Install SQL Developer & Load Sample Data__
+![end](https://github.com/PhilippW94/Kafka_POV/blob/main/images/section-end.png)
+
+## ![3](https://github.com/PhilippW94/Kafka_POV/blob/main/images/3b.png) Install SQL Developer & Load Sample Data
+
 In order to manage the contents of your Oracle database, install the [Oracle SQL Developer](https://www.oracle.com/tools/downloads/sqldev-downloads.html):
 * Choose your operating system 
 * __Create an Oracle Account__ _(you might not want to use your @mongodb.com address here)_
@@ -87,7 +91,9 @@ Now it is time to load some sample data into our Oracle RDS instance:
   * __Load the actual data__ by copying the adjusted contents of the __ot_data.sql__ file to the worksheet tab and executing the script again.
   * This step should take 1-2 min. Once the insert process commences, you should be able to browse your freshly generated SQL database with the loaded sample data.
 
-### __3. Install Kafka Cluster__
+![end](https://github.com/PhilippW94/Kafka_POV/blob/main/images/section-end.png)
+
+## ![4](https://github.com/PhilippW94/Kafka_POV/blob/main/images/4b.png) Install Kafka Cluster
 In this step all required software in order to operate a Kafka Cluster locally is installed **via Docker**. With the image the following applications are installed and started in a new docker container:
 * **Zookeeper**: From [Kafka Getting Started](https://kafka.apache.org/08/documentation.html): "Kafka uses zookeeper so you need to first start a zookeeper server if you don't already have one."
 * **Kafka**: From [What is Apache Kafka®](https://www.confluent.io/what-is-apache-kafka/): "Apache Kafka is a community distributed event streaming platform capable of handling trillions of events a day."
@@ -118,15 +124,18 @@ The following contains a detailed explanation of how to spin up the above mentio
   <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.22.png?raw=true" width="700">
 * You can **view your Kafka cluster's** control pane by going to [localhost:9021](http://localhost:9021) in your browser.
 
-### __4. Configure Atlas Environment__
+![end](https://github.com/PhilippW94/Kafka_POV/blob/main/images/section-end.png)
+
+## ![5](https://github.com/PhilippW94/Kafka_POV/blob/main/images/5b.png) Configure Atlas Environment
 * Log-on to your [Atlas account](http://cloud.mongodb.com) (using the MongoDB SA preallocated Atlas credits system) and navigate to your SA project.
 * In the project's Security tab, choose to add a new user, e.g. __main_user__, and for __User Privileges__ specify __Read and write to any database__ (make a note of the password you specify)
 * In the Security tab, add a new __IP Whitelist__ for your laptop's current IP address
 * Create an __M10__ based 3 node replica-set in a single cloud provider region of your choice with default settings
 * In the Atlas console, for the database cluster you deployed, click the __Connect button__, select __Connect Your Application__, and for the __latest Node.js version__ copy the __Connection String Only__ - make a note of this MongoDB URL address to be used in the next steps
 
+![end](https://github.com/PhilippW94/Kafka_POV/blob/main/images/section-end.png)
 
-### __5. Setup JDBC Source Connector__
+## ![6](https://github.com/PhilippW94/Kafka_POV/blob/main/images/6b.png) Setup JDBC Source Connector
 
 First, the MongoDB and JDBC connector have to be installed in your environment:
 * Retrieve the _CONTAINER ID_ from your **Kafka Connect** container by executing the following command in your terminal:
@@ -192,7 +201,9 @@ Launch the connector by executing the configured API call. The **query** will jo
 
 Having configured ```"mode": "bulk"```will continuously send the data previously loaded into the Oracle instance to our Kafka Cluster. This simulates a constant write load on the Oracle instance.
 
-### __6. Setup MongoDB Sink__
+![end](https://github.com/PhilippW94/Kafka_POV/blob/main/images/section-end.png)
+
+## ![7](https://github.com/PhilippW94/Kafka_POV/blob/main/images/7b.png) Setup MongoDB Sink Connector
 The Sink Connector will be launched by the same means as the Source Connector. You will need do **configure the following API call's payload**:
 ```bash
 curl -X PUT http://localhost:8083/connectors/oracle-mongo-sink/config -H "Content-Type: application/json" -d ' {
@@ -217,8 +228,10 @@ curl -X PUT http://localhost:8083/connectors/oracle-mongo-sink/config -H "Conten
 
 Launch the connector by executing the configured API call. The defined _transforms_ nest the price information into a subdocument.
 
----
-## Execution
+
+![end](https://github.com/PhilippW94/Kafka_POV/blob/main/images/section-end.png)
+
+# Execution
 The execution of this POV is rather straightforward, as at this point there should not be much left to do. You might want to show your prospect the setup of the connectors. 
 
 Once the connectors are configured and launched, navigate to _Connect_ in the [control center](http://localhost:9021) of your Kafka Cluster and click on your connect cluster. You should be seeing the following connectors: <br/><br/>
@@ -234,8 +247,9 @@ Last but not least, we show that the MongoDB Sink Connector does it's job by sho
 
 **Conclusion**: You can easily load data from Oracle to MongoDB via Kafka and additionally transform, nest and ```JOIN``` it on the way.
 
----
-## Merge two collections with a Realm Function and a Trigger
+![end](https://github.com/PhilippW94/Kafka_POV/blob/main/images/section-end.png)
+
+# Merge two collections with a Realm Function and a Trigger
 
 To be independent from the above use case we install a couple more connectors, additional to the JDBC connector already in place from the previous sections of this POV:
 * [connectors/orcale-source-table-whitelisting.sh](https://github.com/PhilippW94/Kafka_POV/blob/main/connectors/orcale-source-table-whitelisting.sh): this Oracle source connector streams all data from the CUSTOMERS and ORDERS tables into the topics oracle-bulk-<tablename>

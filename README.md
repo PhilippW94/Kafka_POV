@@ -87,8 +87,19 @@ Now it is time to load some sample data into our Oracle RDS instance:
   * This step should take 1-2 min. Once the insert process commenced, you should be able to browse your freshly generated SQL database with the loaded sample data.
 
 ### __3. Install Kafka Cluster__
+In this step all required software in order to operate a Kafka Cluster locally is installed **via Docker**. With the image the following applications are installed and started in a new docker container:
+* Zookeeper
+* Kafka
+* Confluent Schema Registry
+* Confluent Kafka Connect
+* Confluent Control Center
+* Confluent KSQL Server
+* Kafka Rest Proxy
+* Kafka Topics UI
+Two important mentions would be the **Confluent Control Center**, which provides a UI for us to control our Kafka Deployment. Also interesting to note for the demonstration of this proof is the **Confluent Kafka Connect** deployment, which will host our connectors from Oracle to Kafka and from Kafka to MongoDB. 
 
-* The Kafka Cluster is installed **via Docker**. Make sure that you have a running version of Docker on your laptop. If not, install it via:
+The following contains a detailed explanation of how to spin up the above mentioned containers:
+* First of all, make sure that you have a running version of Docker on your laptop. If not, install it via:
   ```bash
   brew install --cask docker
   ```

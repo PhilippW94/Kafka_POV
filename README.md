@@ -20,7 +20,7 @@ This proof shows **how MongoDB data from an Oracle instance can be loaded/synced
 6. [Setup JDBC Source Connector](#-setup-jdbc-source-connector)
 7. [Setup MongoDB Sink Connector](#-setup-mongodb-sink-connector)
 
-An execution and demonstration guide is also provided. Last but no least we built a Realm Function and Trigger to merge collections in order to handle 1:N relations between entities.
+An [execution and demonstration guide](#execution) is also provided. Last but no least we built a [Realm Function and Trigger](#-merge-two-collections-with-a-realm-function-and-a-trigger) to merge collections in order to handle 1:N relations between entities.
 
 The execution of **this proof demonstrates how inserting data via SQL leads to data being loaded and stored into MongoDB**. With the used Kafka Connectors, we demonstrate the following **additional capabilities**:
 * How to ```JOIN``` **two tables** via the JDBC Source Connector. Here only **1:1 relationships** are implemented. For **1:N relationships** refer to the section regarding **"Realm Function and Trigger"**
@@ -94,6 +94,8 @@ Now it is time to load some sample data into our Oracle RDS instance:
   * __Load the actual data__ by copying the adjusted contents of the __ot_data.sql__ file to the worksheet tab and executing the script again.
   * This step should take 1-2 min. Once the insert process commences, you should be able to browse your freshly generated SQL database with the loaded sample data.
 
+[Proof Contents](#description-contents)
+
 ![end](https://github.com/PhilippW94/Kafka_POV/blob/main/images/section-end.png)
 
 ## ![4](https://github.com/PhilippW94/Kafka_POV/blob/main/images/4b.png) Install Kafka Cluster
@@ -126,6 +128,8 @@ The following contains a detailed explanation of how to spin up the above mentio
   The output should look as follows: <br/>
   <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.22.png?raw=true" width="700">
 * You can **view your Kafka cluster's** control pane by going to [localhost:9021](http://localhost:9021) in your browser.
+
+[Proof Contents](#description-contents)
 
 ![end](https://github.com/PhilippW94/Kafka_POV/blob/main/images/section-end.png)
 
@@ -204,6 +208,8 @@ Launch the connector by executing the configured API call. The **query** will jo
 
 Having configured ```"mode": "bulk"```will continuously send the data previously loaded into the Oracle instance to our Kafka Cluster. This simulates a constant write load on the Oracle instance.
 
+[Proof Contents](#description-contents)
+
 ![end](https://github.com/PhilippW94/Kafka_POV/blob/main/images/section-end.png)
 
 ## ![7](https://github.com/PhilippW94/Kafka_POV/blob/main/images/7b.png) Setup MongoDB Sink Connector
@@ -231,10 +237,11 @@ curl -X PUT http://localhost:8083/connectors/oracle-mongo-sink/config -H "Conten
 
 Launch the connector by executing the configured API call. The defined _transforms_ nest the price information into a subdocument.
 
+[Proof Contents](#description-contents)
 
 ![end](https://github.com/PhilippW94/Kafka_POV/blob/main/images/section-end.png)
 
-# Execution
+# Execution 
 The execution of this POV is rather straightforward, as at this point there should not be much left to do. You might want to show your prospect the setup of the connectors. 
 
 Once the connectors are configured and launched, navigate to _Connect_ in the [control center](http://localhost:9021) of your Kafka Cluster and click on your connect cluster. You should be seeing the following connectors: <br/><br/>
@@ -249,6 +256,8 @@ Last but not least, we show that the MongoDB Sink Connector does it's job by sho
     <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-27%20at%2015.01.22.png?raw=true" width="700">
 
 **Conclusion**: You can easily load data from Oracle to MongoDB via Kafka and additionally transform, nest and ```JOIN``` it on the way.
+
+[Proof Contents](#description-contents)
 
 ![end](https://github.com/PhilippW94/Kafka_POV/blob/main/images/section-end.png)
 
@@ -274,6 +283,7 @@ To do so we log into MongoDB Atlas and choose **Triggers** on the left side and 
 
 You can find the function inside [realm_functions/addOrderToCustomer.js](https://github.com/PhilippW94/Kafka_POV/blob/main/realm_functions/addOrderToCustomer.js). Not all customers have orders.  
 
+[Proof Contents](#description-contents)
 As a result all orders will be merged into the customers collection. Once the the Realm function is up and running, check result with Compass or the Atlas GUI. No all customers have orders, thus you might want to filter the results by using the following filter parameters: ```{orders:{$exists:true}}```
 
 Thus the 1:N relationship of customer to orders can be implemented "automatically" in MongoDB by nesting the orders in the customer collection. This demonstrates not only the transfer of data from an Oracle Instance to MongoDB, but also the shift in paradigm that data is stored the way it is accessed. 

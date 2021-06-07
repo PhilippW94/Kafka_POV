@@ -20,7 +20,7 @@ This proof shows **how MongoDB data from an Oracle instance can be loaded/synced
 6. [Setup JDBC Source Connector](#-setup-jdbc-source-connector)
 7. [Setup MongoDB Sink Connector](#-setup-mongodb-sink-connector)
 
-An [execution and demonstration guide](#execution) is also provided. Last but no least we built a [Realm Function and Trigger](#-merge-two-collections-with-a-realm-function-and-a-trigger) to merge collections in order to handle 1:N relations between entities.
+An [execution and demonstration guide](#execution) is also provided. Last but no least we built a [Realm Function and Trigger](#merge-two-collections-with-a-realm-function-and-a-trigger) to merge collections in order to handle 1:N relations between entities.
 
 The execution of **this proof demonstrates how inserting data via SQL leads to data being loaded and stored into MongoDB**. With the used Kafka Connectors, we demonstrate the following **additional capabilities**:
 * How to ```JOIN``` **two tables** via the JDBC Source Connector. Here only **1:1 relationships** are implemented. For **1:N relationships** refer to the section regarding **"Realm Function and Trigger"**

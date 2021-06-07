@@ -10,7 +10,7 @@ __Time to execute__: 15 min <br/>
 ## Description Contents
 There is **no prior knowledge of Kafka required** in order to successfully execute this proof. 
 
-This proof shows **how MongoDB data from an Oracle instance can be loaded/synced to a MongoDB instance via a Kafka**. The setup of this proof includes the following parts:
+This proof shows **how MongoDB data from an Oracle instance can be loaded/synced to a MongoDB instance via a local Kafka Cluster**. The setup of this proof includes the following parts:
 
 1. [Configure your Laptop](#-configure-laptop)
 2. [Configure and Setup your AWS RDS instance](#-configure-your-aws-rds-instance)

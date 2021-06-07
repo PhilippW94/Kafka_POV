@@ -8,6 +8,7 @@ __Time to execute__: 15 min <br/>
 
 ---
 ## Description
+There is **no prior knowledge of Kafka required** in order to successfully execute this proof. 
 
 This proof shows **how MongoDB data from an Oracle instance can be loaded/synced to a MongoDB instance via a Kafka**. The setup of this proof includes the following parts:
 
@@ -51,9 +52,9 @@ Once your database was created, __note__ the Endpoint in the "Connectivity & sec
 
 ### __2. Install SQL Developer & Load Sample Data__
 In order to manage the contents of your Oracle database, install the [Oracle SQL Developer](https://www.oracle.com/tools/downloads/sqldev-downloads.html):
-* Chose your operating system 
+* Choose your operating system 
 * __Create an Oracle Account__ _(you might not want to use your @mongodb.com address here)_
-* Try launch SQL Developer. In the current version of __MacOS this can be problematic__. The following workarounds exist:
+* Try to launch SQL Developer. In the current version of __MacOS this can be problematic__. The following workarounds exist:
   * In the Security & Privacy Settings of MacOS _(Access via Spotlight Search)_ you should see the following: <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.44.31.png?raw=true " width="500">
   * Click on __Open Anyway__. Check if SQL Developer opens anyway.
 * If this workaround did not work, the following one should:
@@ -84,7 +85,7 @@ Now it is time to load some sample data into our Oracle RDS instance:
   * Press the following button in order to execute the script: <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.39.png?raw=true" width="20">
   * In the __ot_data.sql__ file, delete all "OT." prefixes, _e.g. by replacing "OT." --> ""_. 
   * __Load the actual data__ by copying the adjusted contents of the __ot_data.sql__ file to the worksheet tab and executing the script again.
-  * This step should take 1-2 min. Once the insert process commenced, you should be able to browse your freshly generated SQL database with the loaded sample data.
+  * This step should take 1-2 min. Once the insert process commences, you should be able to browse your freshly generated SQL database with the loaded sample data.
 
 ### __3. Install Kafka Cluster__
 In this step all required software in order to operate a Kafka Cluster locally is installed **via Docker**. With the image the following applications are installed and started in a new docker container:
@@ -189,7 +190,7 @@ curl -X POST http://localhost:8083/connectors -H "Content-Type: application/json
 
 Launch the connector by executing the configured API call. The **query** will join the sample data's ```PRODUCTS```and ```PRODUCT_CATEGORIES```tables.
 
-Having configured ```"mode": "bulk"```will continously send the data previously loaded into the Oracle instance to our Kafka Cluster. This simulates a constant write load on the Oracle instance.
+Having configured ```"mode": "bulk"```will continuously send the data previously loaded into the Oracle instance to our Kafka Cluster. This simulates a constant write load on the Oracle instance.
 
 ### __6. Setup MongoDB Sink__
 The Sink Connector will be launched by the same means as the Source Connector. You will need do **configure the following API call's payload**:
@@ -226,7 +227,7 @@ Once the connectors are configured and launched, navigate to _Connect_ in the [c
 Here we can see the successfully launched connectors. In order to demonstrate that the JDBC Source Connector is actually doing its job, navigate in the control center of your Kafka Cluster to _Topics_. Here you should see the _oracle-kafka-mongodb_ topic, which includes the data loaded from the Oracle instance to the Kafka Cluster: <br/><br/>
     <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-27%20at%2015.06.36.png?raw=true" width="900">
     
-If you click on the topic itself and select the _messages_ tab you should see the constantly loaded data coming in continously. 
+If you click on the topic itself and select the _messages_ tab you should see the constantly loaded data coming in continuously. 
 
 Last but not least, we show that the MongoDB Sink Connector does it's job by showing that the data actually arrives in Atlas. The resulting documents should be of the following form: <br/><br/>
     <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-27%20at%2015.01.22.png?raw=true" width="700">

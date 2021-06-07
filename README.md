@@ -7,7 +7,7 @@ __Time to setup__: 120 min <br/>
 __Time to execute__: 15 min <br/>
 
 ---
-## Description
+## Description Contents
 There is **no prior knowledge of Kafka required** in order to successfully execute this proof. 
 
 This proof shows **how MongoDB data from an Oracle instance can be loaded/synced to a MongoDB instance via a Kafka**. The setup of this proof includes the following parts:
@@ -51,6 +51,8 @@ Using your MongoDB 'Solution Architects' [AWS pre-existing account](https://wiki
   * __Add Tags__: In the standard creation process, AWS will not prompt you to define tags. Hence, once your instance is being created, click on the DB identifier (e.g. database-1) and navigate to the _Tags_ tab. _Be sure to set the 3 specific tags ('Name', 'owner', 'expire-on' e.g. 2021-12-31) on your instance as per the [MongoDB AWS Usage Guidelines](https://wiki.corp.mongodb.com/display/DEVOPSP/AWS+Reaping+Policies)_ to avoid your instance from being prematurely reaped
 
 Once your database was created, __note__ the Endpoint in the "Connectivity & security" tab for later on. Creation may take up to 10-15min. 
+
+[Proof Contents](#description-contents)
 
 ![end](https://github.com/PhilippW94/Kafka_POV/blob/main/images/section-end.png)
 

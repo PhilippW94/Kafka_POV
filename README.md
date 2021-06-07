@@ -14,12 +14,13 @@ This proof shows **how MongoDB data from an Oracle instance can be loaded/synced
 
 1. [Configure your Laptop](#-configure-laptop)
 2. [Configure and Setup your AWS RDS instance](#-configure-your-aws-rds-instance)
-3. [Install SQL Developer & Load Sample Data](#-Install-SQL-Developer-&-Load-Sample-Data)
-* Kafka Cluster on your local machine
-* MongoDB instance
-* JDBC Source Connector
-* MongoDB Sink Connector
-* Realm Function and Trigger to merge collections
+3. [Install SQL Developer & Load Sample Data](#-install-sql-developer-and-load-sample-data)
+4. [Install Kafka Cluster on your local machine](#-install-kafka-cluster)
+5. [Configure Atlas Environment](#-configure-atlas-environment)
+6. [Setup JDBC Source Connector](#-setup-jdbc-source-connector)
+7. [Setup MongoDB Sink Connector](#-setup-mongodb-sink-connector)
+
+An execution and demonstration guide is also provided. Last but no least we built a Realm Function and Trigger to merge collections in order to handle 1:N relations between entities.
 
 The execution of **this proof demonstrates how inserting data via SQL leads to data being loaded and stored into MongoDB**. With the used Kafka Connectors, we demonstrate the following **additional capabilities**:
 * How to ```JOIN``` **two tables** via the JDBC Source Connector. Here only **1:1 relationships** are implemented. For **1:N relationships** refer to the section regarding **"Realm Function and Trigger"**
@@ -27,7 +28,7 @@ The execution of **this proof demonstrates how inserting data via SQL leads to d
 
 ---
 # Setup
-## ![1](https://github.com/PhilippW94/Kafka_POV/blob/main/images/1b.png) Configure your Laptop 
+## ![1](https://github.com/PhilippW94/Kafka_POV/blob/main/images/1b.png) Configure Laptop 
 Ensure MongoDB version 3.6+ is already installed your laptop, mainly to enable the Mongo Shell and other MongoDB command line tools to be used (no MongoDB databases will be run on the laptop for this proof)
 
 ## ![2](https://github.com/PhilippW94/Kafka_POV/blob/main/images/2b.png) Configure your AWS RDS instance
@@ -53,7 +54,7 @@ Once your database was created, __note__ the Endpoint in the "Connectivity & sec
 
 ![end](https://github.com/PhilippW94/Kafka_POV/blob/main/images/section-end.png)
 
-## ![3](https://github.com/PhilippW94/Kafka_POV/blob/main/images/3b.png) Install SQL Developer & Load Sample Data
+## ![3](https://github.com/PhilippW94/Kafka_POV/blob/main/images/3b.png) Install SQL Developer and Load Sample Data
 
 In order to manage the contents of your Oracle database, install the [Oracle SQL Developer](https://www.oracle.com/tools/downloads/sqldev-downloads.html):
 * Choose your operating system 

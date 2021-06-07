@@ -88,15 +88,14 @@ Now it is time to load some sample data into our Oracle RDS instance:
 
 ### __3. Install Kafka Cluster__
 In this step all required software in order to operate a Kafka Cluster locally is installed **via Docker**. With the image the following applications are installed and started in a new docker container:
-* Zookeeper
-* Kafka
-* Confluent Schema Registry
-* Confluent Kafka Connect
-* Confluent Control Center
-* Confluent KSQL Server
-* Kafka Rest Proxy
-* Kafka Topics UI
-Two important mentions would be the **Confluent Control Center**, which provides a UI for us to control our Kafka Deployment. Also interesting to note for the demonstration of this proof is the **Confluent Kafka Connect** deployment, which will host our connectors from Oracle to Kafka and from Kafka to MongoDB. 
+* **Zookeeper**: From [Kafka Getting Started](https://kafka.apache.org/08/documentation.html): "Kafka uses zookeeper so you need to first start a zookeeper server if you don't already have one."
+* **Kafka**: From [What is Apache Kafka®](https://www.confluent.io/what-is-apache-kafka/): "Apache Kafka is a community distributed event streaming platform capable of handling trillions of events a day."
+* **Confluent Schema Registry**: [From Confluent Docs](https://docs.confluent.io/platform/current/schema-registry/index.html): "Confluent Schema Registry provides a serving layer for your metadata."
+* **Confluent Kafka Connect**: [From Confluent Docs](https://docs.confluent.io/platform/current/connect/index.html): "Kafka Connect is a tool for scalably and reliably streaming data between Apache Kafka® and other data systems." _Kafka Connect will be used in this proof to host the connector from Oracle to Kafka as well as the connector from Kafka to MongoDB._
+* **Confluent KSQL Server**: [From Confluent Docs](https://docs.confluent.io/platform/current/ksqldb/index.html): "ksqlDB is a database purpose-built to help developers create stream processing applications on top of Apache Kafka"
+* **Confluent Control Center**: [From Confluent Docs](https://docs.confluent.io/platform/current/control-center/index.html) "Confluent Control Center is a web-based tool for managing and monitoring Apache Kafka®." _The Confluent Control Center will be used in this POV to control and demonstrate the Kafka Cluster_
+* **Kafka Rest Proxy**: [From Confluent Docs](https://docs.confluent.io/platform/current/kafka-rest/index.html): "The Confluent REST Proxy provides a RESTful interface to a Apache Kafka® cluster"
+* **Kafka Topics UI**: [From Github kafka-topics-ui](https://github.com/lensesio/kafka-topics-ui): "Browse Kafka topics and understand what's happening on your cluster."
 
 The following contains a detailed explanation of how to spin up the above mentioned containers:
 * First of all, make sure that you have a running version of Docker on your laptop. If not, install it via:

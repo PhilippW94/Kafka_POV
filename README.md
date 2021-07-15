@@ -149,7 +149,7 @@ The following contains a detailed explanation of how to spin up the above mentio
 First, the MongoDB and JDBC connector have to be installed in your environment:
 * Retrieve the _CONTAINER ID_ from your **Kafka Connect** container by executing the following command in your terminal:
   ```bash
-  docker ps -a
+  docker ps -a | grep connect
   ```
 * **Note** the _CONTAINER ID_ from **Kafka Connect**:
   <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.14.png?raw=true" width="900">

@@ -172,7 +172,15 @@ First, the MongoDB and JDBC connector have to be installed in your environment:
   * You should see the following overview of selectable connectors:
     <img src="https://github.com/PhilippW94/Kafka_POV/blob/main/images/Screenshot%202021-04-22%20at%2009.45.31.png?raw=true" width="700">
 
-After the installation, configure your JDBC Source Connector. The Source Connector will be launched via the terminal by the means of an API call to the Kafka Connect Cluster. You will need do **configure the following API call's payload**:
+After the installation, configure your JDBC Source Connector. The connector us using polling anyway, but different modes can be choosen:
+* bulk: perform a bulk load of the entire table each time it is polled
+* incrementing: use a strictly incrementing column on each table to detect only new rows. Note that this will not detect modifications or deletions of existing rows.
+* timestamp: use a timestamp (or timestamp-like) column to detect new and modified rows. This assumes the column is updated with each write, and that values are monotonically incrementing, but not necessarily unique.
+* timestamp+incrementing: use two columns, a timestamp column that detects new and modified rows and a strictly incrementing column which provides a globally unique ID for updates so each row can be assigned a unique stream offset.
+
+Find more information here: https://docs.confluent.io/kafka-connect-jdbc/current/source-connector/source_config_options.html
+
+The Source Connector will be launched via the terminal by the means of an API call to the Kafka Connect Cluster. You will need do **configure the following API call's payload**:
   
 ```bash
 curl -X POST http://localhost:8083/connectors -H "Content-Type: application/json" -d '{
